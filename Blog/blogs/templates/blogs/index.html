@@ -1,0 +1,21 @@
+{% extends 'blogs/base.html' %}
+
+{% block content %}
+    <h2>最新文章</h2>
+    {% for post in posts %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <h3>{{ post.title }}</h3>
+            <p style="color: grey;">
+                {{ post.date_added|date:'Y-m-d H:i' }} 
+                by <strong>{{ post.owner }}</strong>
+            </p>
+            <p>{{ post.text|linebreaks }}</p>
+
+            {% if user == post.owner %}
+                <a href="{% url 'blogs:edit_post' post.id %}">编辑</a>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>还没有文章。</p>
+    {% endfor %}
+{% endblock content %}

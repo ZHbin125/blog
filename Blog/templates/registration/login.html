@@ -1,0 +1,7 @@
+<h2>登录</h2>
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">登录</button>
+    <input type="hidden" name="next" value="{% url 'blogs:index' %}" />
+</form>
